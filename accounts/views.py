@@ -9,7 +9,6 @@ from django.views.decorators.http import require_http_methods
 from django.views.generic import FormView, TemplateView, UpdateView
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.hashers import make_password
-
 from accounts.forms import CustomerLoginRegisterForm, CustomerCodeConfirmForm, CustomerPasswordForm, \
     CustomerPasswordSetForm, ServiceProviderRegistrationForm, ServiceProviderLoginForm, CustomerProfileUpdateForm
 from accounts.models import Customer
