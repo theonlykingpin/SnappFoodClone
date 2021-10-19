@@ -1,6 +1,6 @@
 from django.contrib.auth.base_user import AbstractBaseUser
 from django.contrib.auth.hashers import make_password
-from django.contrib.auth.models import PermissionsMixin, AbstractUser, UserManager
+from django.contrib.auth.models import PermissionsMixin, UserManager, AbstractUser
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 from django.utils import timezone
@@ -48,6 +48,11 @@ class Customer(AbstractBaseUser):
     REQUIRED_FIELDS = []
     objects = CustomerManager()
 
+    class Meta:
+        verbose_name = _('Customer')
+        verbose_name_plural = _('Customers')
+        db_table = 'customer'
+
     @property
     def full_name(self):
         full_name = '%s %s' % (self.first_name, self.last_name)
@@ -55,11 +60,6 @@ class Customer(AbstractBaseUser):
 
     def __str__(self):
         return f"{self.full_name} - {self.phone_number}"
-
-    class Meta:
-        verbose_name = _('Customer')
-        verbose_name_plural = _('Customers')
-        db_table = 'customer'
 
 
 class ServiceProvider(AbstractBaseUser):
