@@ -44,7 +44,7 @@ class CustomerLoginRegisterView(FormView):
             else:
                 set_phone_number_session(self.request, phone_number)
 
-        return super().form_valid(form)
+        return super(CustomerLoginRegisterView, self).form_valid(form)
 
 
 @method_decorator(require_http_methods(['GET', 'POST']), name='dispatch')
@@ -57,7 +57,7 @@ class CustomerPhoneNumberConfirmView(FormView):
 
     def dispatch(self, request, *args, **kwargs):
         check_expire_time(request)
-        return super().dispatch(request, *args, **kwargs)
+        return super(CustomerPhoneNumberConfirmView, self).dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
         phone_number = self.request.session['phone_number']
@@ -72,9 +72,9 @@ class CustomerPhoneNumberConfirmView(FormView):
                 if customer:
                     login(self.request, customer)
                     messages.info(self.request, 'Login success', 'success')
-                    return super().form_valid(form)
+                    return super(CustomerPhoneNumberConfirmView, self).form_valid(form)
                 else:
-                    return super().form_valid(form)
+                    return super(CustomerPhoneNumberConfirmView, self).form_valid(form)
 
             else:
                 messages.info(self.request, 'The code is incorrect!', 'danger')
@@ -103,7 +103,7 @@ class CustomerPasswordConfirmView(FormView):
         if customer:
             login(self.request, customer)
             messages.info(self.request, 'Login success', 'success')
-            return super().form_valid(form)
+            return super(CustomerPasswordConfirmView, self).form_valid(form)
 
         else:
             messages.info(self.request, 'Your password is incorrect!', 'danger')
@@ -180,7 +180,7 @@ class ServiceProviderRegistrationView(FormView):
         instance = form.save(commit=False)
         instance.password = make_password(instance.password)
         instance.save()
-        return super().form_valid(form)
+        return super(ServiceProviderRegistrationView, self).form_valid(form)
 
 
 @method_decorator(require_http_methods(['POST', 'GET']), name='dispatch')
@@ -196,7 +196,7 @@ class ServiceProviderLoginView(FormView):
         user_authenticated = authenticate(username=user.username, password=user.password)
         if user_authenticated:
             login(self.request, user_authenticated)
-        return super().form_valid(form)
+        return super(ServiceProviderLoginView, self).form_valid(form)
 
 
 @method_decorator(require_http_methods(['GET']), name='dispatch')
