@@ -1,5 +1,7 @@
 from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, user_passes_test as user_test
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.views import PasswordChangeView, LogoutView
 from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
@@ -7,8 +9,7 @@ from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.decorators.http import require_http_methods
 from django.views.generic import FormView, TemplateView, UpdateView
-from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.hashers import make_password
+
 from accounts.forms import CustomerLoginRegisterForm, CustomerCodeConfirmForm, CustomerPasswordForm, \
     CustomerPasswordSetForm, ServiceProviderRegistrationForm, ServiceProviderLoginForm, CustomerProfileUpdateForm
 from accounts.models import Customer
