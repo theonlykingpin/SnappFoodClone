@@ -9,7 +9,7 @@ from accounts.models import Customer, ServiceProvider
 
 def phone_number_validator(value):
     if not value.startswith('98') or len(value) != 12:
-        raise ValidationError('phone number must be like 98912*******')
+        raise ValidationError('Phone number must start with 98, and be 12 digits.')
 
 
 def check_expire_time(request):
